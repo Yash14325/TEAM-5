@@ -53,7 +53,22 @@ curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
 **Windows:**
-Download and install from [ollama.ai/download](https://ollama.ai/download)
+1. Download and install from [ollama.ai/download](https://ollama.ai/download)
+2. **Important**: Add Ollama to your system PATH environment variable:
+   - The installer typically installs Ollama to `C:\Users\<YourUsername>\AppData\Local\Programs\Ollama`
+   - **Option 1 - Add to User Environment Variables:**
+     1. Open "Edit environment variables for your account" from Start menu
+     2. Under "User variables", select "Path" and click "Edit"
+     3. Click "New" and add: `C:\Users\<YourUsername>\AppData\Local\Programs\Ollama`
+     4. Click "OK" on all dialogs
+   - **Option 2 - Add to System Environment Variables (requires admin):**
+     1. Open "Edit the system environment variables" from Start menu
+     2. Click "Environment Variables"
+     3. Under "System variables", select "Path" and click "Edit"
+     4. Click "New" and add: `C:\Users\<YourUsername>\AppData\Local\Programs\Ollama`
+     5. Click "OK" on all dialogs
+3. **Restart your terminal/command prompt** after adding to PATH
+4. Verify installation: Open a new terminal and run `ollama --version`
 
 ### 5. Pull the LLM Model
 
@@ -259,12 +274,21 @@ See `requirements.txt` for complete dependency list with versions.
 
 ### Ollama Connection Issues
 
-**Error**: "Ollama not available"
+**Error**: "Ollama not available" or "ollama: command not found"
 
 **Solution**:
 1. Ensure Ollama is installed and running: `ollama serve`
 2. Check if the model is pulled: `ollama list`
 3. Pull the model if missing: `ollama pull llama3.2:3b`
+4. **Windows users**: If you get "command not found", verify Ollama is in your PATH:
+   - Open a new terminal and run `ollama --version`
+   - If it fails, add Ollama to PATH (see installation step 4 above)
+   - The default path is: `C:\Users\<YourUsername>\AppData\Local\Programs\Ollama`
+   - Restart your terminal after adding to PATH
+5. **Linux/macOS users**: If Ollama isn't in PATH, it may be installed in a custom location:
+   - Try: `which ollama` to find the installation path
+   - Add it to PATH: `export PATH=$PATH:/path/to/ollama`
+   - Add to `~/.bashrc` or `~/.zshrc` to make permanent
 
 The system will fall back to a stub LLM if Ollama is unavailable, which returns mock data for testing.
 
