@@ -18,8 +18,8 @@ sounddevice>=0.4.6
 
 # ===============================
 # Numerical Computing
-# Note: numpy is a dependency of librosa, torch, and other packages
-# but not directly imported in the codebase
+# Note: numpy is required by librosa, torch, and other packages
+# Explicitly listed to ensure compatible version
 # ===============================
 numpy>=1.23.0
 
@@ -39,18 +39,20 @@ langchain-ollama>=0.1.0
 ollama>=0.1.0
 
 # ===============================
-# RAG - Vector Store (Optional)
-# Falls back to keyword-based retrieval if not available
-# ===============================
-chromadb>=0.4.0
-
-# ===============================
 # Utilities
 # ===============================
 pydantic>=2.0.0
 
 # ===============================
-# GuardrailsAI - Input/Output Validation (Optional)
-# System works without it but with reduced safety checks
+# Optional Dependencies (Recommended)
+# Install all: pip install -r requirements.txt
+# Skip optional: Install packages above only, system will use fallbacks
 # ===============================
+
+# RAG - Vector Store
+# Falls back to keyword-based retrieval if not available
+chromadb>=0.4.0
+
+# Input/Output Validation
+# System works without it but with reduced safety checks
 guardrails-ai>=0.5.0
