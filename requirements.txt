@@ -18,9 +18,10 @@ sounddevice>=0.4.6
 
 # ===============================
 # Numerical Computing
+# Note: numpy is a dependency of librosa, torch, and other packages
+# but not directly imported in the codebase
 # ===============================
 numpy>=1.23.0
-scipy>=1.9.0
 
 # ===============================
 # Speech Features
@@ -38,25 +39,18 @@ langchain-ollama>=0.1.0
 ollama>=0.1.0
 
 # ===============================
-# RAG - Vector Store & Embeddings
+# RAG - Vector Store (Optional)
+# Falls back to keyword-based retrieval if not available
 # ===============================
 chromadb>=0.4.0
 
 # ===============================
-# Transformers & Acceleration
+# Utilities
 # ===============================
-transformers>=4.30.0
-accelerate>=0.20.3
-sentencepiece>=0.1.98
-
-# ===============================
-# HTTP Client & Utilities
-# ===============================
-httpx>=0.23.0
 pydantic>=2.0.0
-typing-extensions>=4.0.0
 
 # ===============================
-# GuardrailsAI - Input/Output Validation
+# GuardrailsAI - Input/Output Validation (Optional)
+# System works without it but with reduced safety checks
 # ===============================
 guardrails-ai>=0.5.0
