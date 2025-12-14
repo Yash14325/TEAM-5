@@ -36,29 +36,24 @@ langchain>=0.1.0
 langchain-core>=0.1.0
 langchain-community
 langchain-ollama>=0.1.0
-langchain-classic>=1.0.0
 ollama>=0.1.0
-
-# ===============================
-# RAG - Vector Store & Embeddings
-# ===============================
-chromadb>=0.4.0
 
 # ===============================
 # Evaluations - LangChain Quality Assessment
 # ===============================
 # langchain-classic provides CriteriaEvalChain, ScoreStringEvalChain, JsonValidityEvaluator
 # Used for evaluating agent outputs against built-in and custom criteria
+# Falls back to regular langchain.evaluation if not available
+langchain-classic>=1.0.0
 
 # ===============================
-# Transformers & Acceleration
+# API Framework
 # ===============================
-transformers>=4.30.0
-accelerate>=0.20.3
-sentencepiece>=0.1.98
+fastapi>=0.95.0
+uvicorn>=0.22.0
 
 # ===============================
-# HTTP Client & Utilities
+# Utilities
 # ===============================
 pydantic>=2.0.0
 
@@ -75,5 +70,3 @@ chromadb>=0.4.0
 # Input/Output Validation
 # System works without it but with reduced safety checks
 guardrails-ai>=0.5.0
-fastapi>=0.95.0
-uvicorn>=0.22.0
