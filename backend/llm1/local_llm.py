@@ -34,5 +34,5 @@ def get_llm():
         print("   Using stub LLM for testing...")
         
         # Import stub from main llm module
-        from llm.local_llm import _StubLLM
+        from llm1.local_llm import _StubLLM
         return _StubLLM()

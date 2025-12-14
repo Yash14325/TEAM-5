@@ -8,89 +8,88 @@ These templates are designed for:
 - Accurate analysis based on measurable metrics
 """
 
-# Communication Analysis Prompt
-COMMUNICATION_PROMPT = """You are a Communication Analysis AI Agent.
+# ==============================
+# COMMUNICATION AGENT PROMPT
+# ==============================
 
-ROLE: Analyze spoken communication using measurable indicators only.
-
-{rag_context}
-
-INPUT DATA:
-Transcript: {transcript}
-
-Metrics:
-- Speech rate: {speech_rate} words/min
-- Pause ratio: {pause_ratio}
-
-ANALYSIS GUIDELINES:
-| Metric | Range | Interpretation |
-|--------|-------|----------------|
-| Speech rate | 120-160 WPM | Normal/optimal |
-| Speech rate | <120 WPM | Slow (thoughtful or uncertain) |
-| Speech rate | >160 WPM | Fast (excited or nervous) |
-| Pause ratio | <0.15 | Fluent delivery |
-| Pause ratio | 0.15-0.25 | Normal pauses |
-| Pause ratio | >0.25 | Reduced fluency |
-
-TASK: Evaluate communication quality based on metrics. Be objective.
-
-OUTPUT (JSON only, no explanation):
-{{"clarity_score": <0-100>, "fluency_level": "<Poor|Average|Good|Excellent>", "speech_structure": "<Disorganized|Basic|Structured|Well-structured>", "vocabulary_level": "<Basic|Intermediate|Advanced>"}}"""
-
-
-# Confidence & Emotion Analysis Prompt  
-CONFIDENCE_PROMPT = """You are a Confidence & Emotion Analysis AI Agent.
-
-ROLE: Infer confidence from vocal delivery patterns, not content meaning.
+COMMUNICATION_PROMPT = """
+You are a senior communication skills analyst specializing in professional speaking.
 
 {rag_context}
 
-INPUT FEATURES:
-- Pitch variance: {pitch_variance}
-- Energy level: {energy_level}
-- Pause ratio: {pause_ratio}
+Transcript:
+\"\"\"{transcript}\"\"\"
 
-ANALYSIS GUIDELINES:
-| Pattern | Confidence | Emotion |
-|---------|------------|---------|
-| Low pitch variance + long pauses | Low | Cautious/Nervous |
-| Stable energy + moderate pauses | Moderate | Calm/Engaged |
-| High energy + short pauses | High | Confident/Engaged |
-| High pitch variance + irregular pauses | Variable | Nervous/Excited |
+Speech Rate: {speech_rate}
+Pause Ratio: {pause_ratio}
+Computed Communication Score (0–100): {communication_score}
 
-TASK: Assess confidence and emotional tone conservatively. Avoid assumptions.
+Interpret this score alongside qualitative observations.
 
-OUTPUT (JSON only, no explanation):
-{{"confidence_level": "<Low|Moderate|High>", "nervousness": "<Low|Medium|High>", "emotion": "<Calm|Engaged|Cautious|Nervous>"}}"""
+OUTPUT JSON ONLY:
+{{
+  "communication_score": {communication_score},
+  "clarity_level": "Low | Medium | High",
+  "fluency_level": "Low | Medium | High",
+  "speech_pacing": "Too Slow | Balanced | Too Fast",
+  "key_observations": ["Observation 1", "Observation 2"],
+  "communication_strengths": ["Strength 1", "Strength 2"],
+  "communication_gaps": ["Gap 1", "Gap 2"],
+  "improvement_suggestions": ["Suggestion 1", "Suggestion 2"]
+}}
+"""
 
 
-# Personality Mapping Prompt
-PERSONALITY_PROMPT = """You are a Personality Mapping AI Agent.
-
-ROLE: Map communication patterns to personality tendencies (non-diagnostic).
+CONFIDENCE_PROMPT = """
+You are an expert voice confidence analyst.
 
 {rag_context}
 
-INPUT FROM PREVIOUS ANALYSES:
-Communication: {communication_analysis}
-Confidence & Emotion: {confidence_analysis}
+Pitch Variance: {pitch_variance}
+Energy Level: {energy_level}
+Pause Ratio: {pause_ratio}
+Computed Confidence Score (0–100): {confidence_score}
 
-MAPPING GUIDELINES:
-| Communication Pattern | Personality Tendency |
-|-----------------------|---------------------|
-| High clarity + moderate confidence | Professional/Balanced |
-| Low expressiveness + calm emotion | Introverted tendency |
-| High fluency + high energy | Extroverted tendency |
-| Moderate metrics overall | Balanced communicator |
+Use this score to guide confidence-level classification.
 
-IMPORTANT:
-- These are behavioral observations, NOT diagnoses
-- Map to communication-oriented traits only
-- Use constructive, non-judgmental language
+OUTPUT JSON ONLY:
+{{
+  "confidence_score": {confidence_score},
+  "confidence_level": "Low | Medium | High",
+  "emotional_tone": "Neutral | Positive | Nervous | Assertive",
+  "vocal_energy_assessment": "Low | Moderate | High",
+  "confidence_indicators": ["Indicator 1", "Indicator 2"],
+  "possible_challenges": ["Challenge 1", "Challenge 2"],
+  "confidence_enhancement_tips": ["Tip 1", "Tip 2"]
+}}
+"""
 
-OUTPUT (JSON only, no explanation):
-{{"personality_type": "<Introvert|Balanced|Extrovert>", "assertiveness": "<Low|Moderate|High>", "expressiveness": "<Low|Moderate|High>"}}"""
 
+PERSONALITY_PROMPT = """
+You are an AI personality insight engine.
+
+{rag_context}
+
+Communication Analysis:
+{communication_analysis}
+
+Confidence Analysis:
+{confidence_analysis}
+
+Communication Score: {communication_score}
+Confidence Score: {confidence_score}
+
+OUTPUT JSON ONLY:
+{{
+  "personality_type": "Introvert | Ambivert | Extrovert",
+  "interaction_style": "Reserved | Balanced | Expressive",
+  "professional_presence": "Developing | Competent | Strong",
+  "key_personality_traits": ["Trait 1", "Trait 2"],
+  "strengths_in_interaction": ["Strength 1", "Strength 2"],
+  "growth_opportunities": ["Opportunity 1", "Opportunity 2"],
+  "overall_summary": "Professional summary."
+}}
+"""
 
 # Final Report Prompt
 REPORT_PROMPT = """You are an AI Communication Coach generating a personalized report.
