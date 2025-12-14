@@ -52,7 +52,7 @@ export default function AudioRecorder({
   return (
     <div>
       {!recording ? (
-        <button onClick={startRecording}>🎙 Start Recording</button>
+        <button onClick={startRecording} disabled={loading}>🎙 Start Recording</button>
       ) : (
         <button onClick={stopRecording}>⏹ Stop Recording</button>
       )}
